@@ -1,6 +1,6 @@
 # Maintainer: Your Name <youremail@domain.com>
-pkgname="imcommander"
-pkgver="0.0.2"
+pkgname="ImCommander"
+pkgver="0.0.3"
 pkgrel="1"
 pkgdesc="Split file manager using ImGui"
 arch=("any")
@@ -17,14 +17,14 @@ backup=()
 options=()
 install=
 changelog=
-source=("${pkgname}-v${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
+source=("${pkgname}-v${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
 noextract=()
-sha256sums=('215e1a44576f3f767417ed8989b6597cfbe2465308882efd65204834dd2db367')
+sha256sums=('e038bbe9c1781dfcb844aae70eeda4eaadcf5fe5f61e0b503397f97d72d68899')
 
 build() {
   cd "$pkgname-$pkgver"
-  cmake -B build -S . -GNinja -DCMAKE_INSTALL_PREFIX=/usr
-  cmake --build build
+  cmake -B build -S . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DImCommander_ENABLE_HARDENING=OFF -DImCommander_ENABLE_CLANG_TIDY=OFF -DImCommander_ENABLE_CPPCHECK=OFF -DImCommander_ENABLE_GLOBAL_HARDENING=OFF
+  cmake --build build --config RelWithDebInfo
 }
 
 package() {
